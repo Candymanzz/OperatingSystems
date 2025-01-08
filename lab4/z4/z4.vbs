@@ -41,26 +41,49 @@ Sub DisplayAndSetDefaultPrinter()
 End Sub
 
 Sub DisplayNetworkDrives()
-    Set objNetwork = CreateObject("WScript.Network")
-    Dim drives
-    drives = objNetwork.EnumNetworkDrives
+    ' Укажите путь к папке с общим доступом и букву диска
+    Dim networkPath, driveLetter
+    networkPath = "\\PAVEL\ychoba" ' замените на ваш путь
+    driveLetter = "Z:" ' замените на желаемую букву диска
 
-    If UBound(drives) >= 0 Then
-        WScript.Echo "Подключенные сетевые диски:"
-        For i = 0 To UBound(drives) Step 2
-            WScript.Echo drives(i) & " -> " & drives(i + 1)
-        Next
-        WScript.Echo "Количество подключенных сетевых дисков: " & (UBound(drives) / 2 + 1)
+    ' Подключаем сетевой диск
+    Set objNetwork = CreateObject("WScript.Network")
+    On Error Resume Next
+    objNetwork.MapNetworkDrive driveLetter, networkPath
+    If Err.Number <> 0 Then
+        WScript.Echo "Ошибка подключения: " & Err.Description
+        Err.Clear
     Else
-        WScript.Echo "Нет подключенных сетевых дисков."
+        WScript.Echo "Сетевой диск " & driveLetter & " подключен к " & networkPath
     End If
+    On Error GoTo 0
+
+    ' Создаем объект для работы с файловой системой
+    Set objFSO = CreateObject("Scripting.FileSystemObject")
+
+    ' Получаем коллекцию дисков
+    Set objDrives = objFSO.Drives
+
+    ' Переменная для подсчета сетевых дисков
+    networkDriveCount = 0
+
+    ' Перебираем все диски и выводим сетевые
+    For Each objDrive In objDrives
+        If objDrive.DriveType = 3 Then ' 3 - это тип сетевого диска
+            WScript.Echo "Сетевой диск: " & objDrive.DriveLetter & " - " & objDrive.ShareName
+            networkDriveCount = networkDriveCount + 1
+        End If
+    Next
+
+    ' Выводим общее количество сетевых дисков
+    WScript.Echo "Общее количество сетевых дисков: " & networkDriveCount
 End Sub
 
 Sub DisconnectNetworkDrive()
     On Error Resume Next 
 
     Set objNetwork = CreateObject("WScript.Network")
-    driveLetter = "Z:" 
+    driveLetter = "E:" 
 
     objNetwork.RemoveNetworkDrive driveLetter, True, True
     If Err.Number <> 0 Then
