@@ -1,0 +1,16 @@
+total 32
+-rw-rw-r-- 1 mint mint     0 Dec 16 22:17 file_list.txt
+-rwxrwxr-x 1 mint mint    69 Dec 16 22:15 list_params.sh
+drwxrwxr-x 4 mint mint   180 Dec 16 22:13 OS
+-rw-rw-r-- 1 mint mint 24068 Dec 16 21:21 test
+-rw-rw-r-- 1 mint mint   116 Dec 16 21:20 output.txt
+drwxr-xr-x 2 mint mint    40 Dec 16 18:13 Downloads
+drwxr-xr-x 2 mint mint    40 Dec 16 18:13 Public
+drwxr-xr-x 2 mint mint    40 Dec 16 18:13 Documents
+drwxr-xr-x 2 mint mint    40 Dec 16 18:13 Music
+drwxr-xr-x 2 mint mint    40 Dec 16 18:13 Pictures
+drwxr-xr-x 2 mint mint    40 Dec 16 18:13 Videos
+-rw-r--r-- 1 mint mint     0 Dec 16 17:03 recovery.key
+drwxr-xr-x 2 mint mint    60 Dec 16 17:00 Desktop
+drwxr-xr-x 2 mint mint    40 Dec 16 17:00 Templates
+Total files: 134

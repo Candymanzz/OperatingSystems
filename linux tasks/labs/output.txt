@@ -1,0 +1,12 @@
+nohup: ignoring input
+Desktop
+Documents
+Downloads
+Music
+OS
+Pictures
+Public
+Templates
+Videos
+output.txt
+recovery.key
